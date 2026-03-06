@@ -32,23 +32,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root {
       --bg-1: #060812;
-      --bg-2: #0a1020;
+      --bg-2: #0b1020;
       --bg-3: #1d1234;
-      --glass: rgba(255, 255, 255, 0.08);
-      --glass-strong: rgba(255, 255, 255, 0.12);
       --border: rgba(255, 255, 255, 0.12);
       --text: #ffffff;
       --muted: rgba(255, 255, 255, 0.78);
-      --muted-soft: rgba(255, 255, 255, 0.60);
+      --muted-soft: rgba(255, 255, 255, 0.62);
       --accent-1: #7b3dff;
-      --accent-2: #a67dff;
+      --accent-2: #aa83ff;
       --accent-3: #5f25d9;
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
     }
@@ -120,7 +118,7 @@
     }
 
     .shell {
-      width: min(100%, 1120px);
+      width: min(100%, 1240px);
       position: relative;
       z-index: 1;
     }
@@ -128,17 +126,17 @@
     .card {
       position: relative;
       overflow: hidden;
-      border-radius: 34px;
+      border-radius: 38px;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.11),
+        rgba(255, 255, 255, 0.12),
         rgba(255, 255, 255, 0.05)
       );
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
-      padding: 34px;
+      padding: 34px 34px 36px;
     }
 
     .card::before {
@@ -156,9 +154,9 @@
       z-index: 1;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 22px;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
@@ -166,56 +164,75 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 16px;
+      padding: 14px 20px;
       border-radius: 999px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.92);
-      font-size: 14px;
-      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
     }
 
     .brand-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
-      box-shadow: 0 0 16px rgba(123, 61, 255, 0.72);
+      box-shadow: 0 0 18px rgba(123, 61, 255, 0.78);
+    }
+
+    .izmy-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+      max-width: 520px;
+      margin-left: auto;
+    }
+
+    .izmy-logo-box {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .izmy-logo-box img {
+      height: 86px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,0.24));
     }
 
     .izmy-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      max-width: 520px;
-      padding: 10px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.92);
-      line-height: 1.35;
-    }
-
-    .izmy-badge img {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-      border-radius: 10px;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.04);
+      width: 100%;
+      padding: 18px 22px;
+      border-radius: 24px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.11),
+        rgba(255,255,255,0.07)
+      );
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+      text-align: left;
     }
 
     .izmy-badge strong {
       display: block;
-      font-size: 13px;
+      font-size: 21px;
       font-weight: 800;
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 6px;
     }
 
     .izmy-badge span {
       display: block;
-      font-size: 12px;
-      color: rgba(255,255,255,0.72);
-      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      font-weight: 700;
     }
 
     .inner {
@@ -223,7 +240,7 @@
       z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1.08fr;
-      gap: 30px;
+      gap: 34px;
       align-items: center;
     }
 
@@ -231,14 +248,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 420px;
+      min-height: 480px;
       position: relative;
     }
 
     .visual-ring {
       position: absolute;
-      width: 360px;
-      height: 360px;
+      width: 400px;
+      height: 400px;
       border-radius: 50%;
       background:
         radial-gradient(circle, rgba(123, 61, 255, 0.20), rgba(123, 61, 255, 0.02) 62%, transparent 72%);
@@ -247,10 +264,10 @@
 
     .logo-wrap {
       position: relative;
-      width: 270px;
-      height: 270px;
-      border-radius: 34px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+      width: 320px;
+      height: 320px;
+      border-radius: 38px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
       border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
@@ -261,42 +278,41 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       animation: floatLogo 5.4s ease-in-out infinite;
-      padding: 28px;
+      padding: 34px;
     }
 
     .logo-wrap img {
       width: 100%;
-      max-width: 190px;
+      max-width: 230px;
       height: auto;
       display: block;
-      border-radius: 22px;
       object-fit: contain;
     }
 
     .title {
       margin: 0;
-      font-size: clamp(38px, 5.4vw, 68px);
-      line-height: 0.98;
+      font-size: clamp(50px, 5.9vw, 86px);
+      line-height: 0.97;
       font-weight: 800;
-      letter-spacing: -2px;
-      max-width: 640px;
+      letter-spacing: -2.4px;
+      max-width: 760px;
     }
 
     .title-gradient {
       display: inline;
-      background: linear-gradient(90deg, #ffffff, #d3c0ff 45%, #aa86ff 100%);
+      background: linear-gradient(90deg, #ffffff, #d4c2ff 45%, #aa86ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .subtitle {
-      margin: 20px 0 0;
-      font-size: clamp(16px, 1.9vw, 20px);
-      line-height: 1.75;
+      margin: 22px 0 0;
+      font-size: clamp(21px, 2vw, 30px);
+      line-height: 1.62;
       color: var(--muted);
-      max-width: 560px;
-      font-weight: 600;
+      max-width: 700px;
+      font-weight: 700;
     }
 
     .highlight {
@@ -305,90 +321,86 @@
     }
 
     .countdown-box {
-      margin-top: 28px;
+      margin-top: 34px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
     }
 
     .countdown {
-      min-width: 68px;
-      height: 68px;
-      border-radius: 20px;
+      min-width: 82px;
+      height: 82px;
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(180deg, rgba(123,61,255,0.28), rgba(123,61,255,0.16));
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
-      font-size: 28px;
+      font-size: 34px;
       font-weight: 800;
     }
 
     .countdown-text {
-      color: rgba(255,255,255,0.90);
-      font-size: 15px;
-      line-height: 1.6;
+      color: rgba(255,255,255,0.92);
+      font-size: 22px;
+      line-height: 1.55;
       font-weight: 700;
-      max-width: 320px;
+      max-width: 470px;
     }
 
     .actions {
-      margin-top: 30px;
+      margin-top: 34px;
       display: flex;
-      gap: 14px;
+      gap: 18px;
+      align-items: center;
       flex-wrap: wrap;
     }
 
-    .btn {
-      appearance: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
+    .store-btn {
+      width: 102px;
+      height: 102px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 58px;
-      padding: 0 22px;
-      border-radius: 18px;
-      font-size: 15px;
-      font-weight: 800;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-      white-space: nowrap;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-icon {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .btn-primary {
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent-1), var(--accent-3));
-      box-shadow: 0 16px 40px rgba(123, 61, 255, 0.30);
-    }
-
-    .btn-secondary {
-      color: #ffffff;
-      background: rgba(255,255,255,0.08);
+      border-radius: 26px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.12),
+        rgba(255,255,255,0.06)
+      );
       border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .store-btn:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 24px 50px rgba(123, 61, 255, 0.20),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .store-btn img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      display: block;
     }
 
     .footer-note {
-      margin-top: 18px;
-      font-size: 13px;
+      margin-top: 20px;
+      font-size: 16px;
       color: var(--muted-soft);
       line-height: 1.7;
-      max-width: 520px;
-      font-weight: 600;
+      max-width: 620px;
+      font-weight: 700;
     }
 
     .shine {
@@ -426,14 +438,14 @@
       50% { transform: translateY(10px); }
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1080px) {
       .inner {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 22px;
       }
 
       .visual {
-        min-height: 250px;
+        min-height: 280px;
       }
 
       .visual-ring {
@@ -444,7 +456,7 @@
       .logo-wrap {
         width: 220px;
         height: 220px;
-        padding: 22px;
+        padding: 24px;
       }
 
       .logo-wrap img {
@@ -456,38 +468,66 @@
       }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 760px) {
       body {
         padding: 12px;
         align-items: stretch;
       }
 
+      .shell {
+        width: 100%;
+      }
+
       .card {
         border-radius: 28px;
-        padding: 18px 16px 20px;
+        padding: 18px 16px 22px;
       }
 
       .topbar {
-        align-items: stretch;
-        margin-bottom: 14px;
+        gap: 14px;
+        margin-bottom: 12px;
       }
 
       .brand-badge {
-        width: fit-content;
+        font-size: 15px;
+        padding: 12px 16px;
+      }
+
+      .izmy-wrap {
+        width: 100%;
+        max-width: 100%;
+        align-items: flex-start;
+      }
+
+      .izmy-logo-box {
+        justify-content: flex-start;
+      }
+
+      .izmy-logo-box img {
+        height: 62px;
       }
 
       .izmy-badge {
-        width: 100%;
-        max-width: 100%;
+        padding: 14px 16px;
+        border-radius: 18px;
+      }
+
+      .izmy-badge strong {
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .izmy-badge span {
+        font-size: 12px;
       }
 
       .visual {
-        min-height: 190px;
+        min-height: 185px;
       }
 
       .visual-ring {
-        width: 200px;
-        height: 200px;
+        width: 190px;
+        height: 190px;
       }
 
       .logo-wrap {
@@ -498,31 +538,31 @@
       }
 
       .logo-wrap img {
-        max-width: 120px;
-        border-radius: 16px;
+        max-width: 112px;
       }
 
       .title {
-        font-size: clamp(32px, 11vw, 48px);
+        font-size: clamp(36px, 11vw, 52px);
         line-height: 1.02;
-        letter-spacing: -1.4px;
+        letter-spacing: -1.6px;
       }
 
       .subtitle {
         margin-top: 14px;
-        font-size: 15px;
-        line-height: 1.7;
+        font-size: 16px;
+        line-height: 1.65;
       }
 
       .countdown-box {
         margin-top: 22px;
-        align-items: center;
+        gap: 14px;
       }
 
       .countdown {
         min-width: 58px;
         height: 58px;
         font-size: 24px;
+        border-radius: 18px;
       }
 
       .countdown-text {
@@ -531,17 +571,24 @@
       }
 
       .actions {
-        margin-top: 22px;
-        flex-direction: column;
+        margin-top: 24px;
+        gap: 14px;
       }
 
-      .btn {
-        width: 100%;
-        justify-content: center;
+      .store-btn {
+        width: 78px;
+        height: 78px;
+        border-radius: 20px;
+      }
+
+      .store-btn img {
+        width: 40px;
+        height: 40px;
       }
 
       .footer-note {
         font-size: 12px;
+        margin-top: 16px;
       }
     }
   </style>
@@ -561,11 +608,14 @@
           <span>Leylix</span>
         </div>
 
-        <div class="izmy-badge">
-          <img src="assets/IzmyLogo.jpg" alt="IZMY Entertainment GmbH" />
-          <div>
+        <div class="izmy-wrap">
+          <div class="izmy-logo-box">
+            <img src="assets/IzmyLogo.jpg" alt="IZMY Entertainment GmbH" />
+          </div>
+
+          <div class="izmy-badge">
             <strong>Empfohlen durch IZMY Entertainment GmbH</strong>
-            <span>Exclusive Adresse der Prominenten von heute und morgen.</span>
+            <span>Die exklusive Adresse der Prominenten von heute und morgen.</span>
           </div>
         </div>
       </div>
@@ -600,28 +650,22 @@
           <div class="actions">
             <a
               id="playStoreBtn"
-              class="btn btn-primary"
+              class="store-btn"
               href="https://play.google.com/store/apps/details?id=com.leylix"
+              aria-label="Zum Play Store"
+              title="Zum Play Store"
             >
-              <img
-                class="btn-icon"
-                src="assets/playstore.png"
-                alt="Google Play"
-              />
-              <span>Zum Play Store</span>
+              <img src="assets/playStore.png" alt="Play Store" />
             </a>
 
             <a
               id="appStoreBtn"
-              class="btn btn-secondary"
+              class="store-btn"
               href="https://apps.apple.com/de/app/leylix/id6657989905"
+              aria-label="Zum App Store"
+              title="Zum App Store"
             >
-              <img
-                class="btn-icon"
-                src="assets/appStore.png"
-                alt="App Store"
-              />
-              <span>Zum App Store</span>
+              <img src="assets/appStore.png" alt="App Store" />
             </a>
           </div>
 
