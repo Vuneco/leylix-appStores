@@ -2,7 +2,10 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>Leylix – Mach deine Events noch besser</title>
   <meta
     name="description"
@@ -26,89 +29,100 @@
   />
   <meta name="twitter:image" content="https://store.leylix.com/assets/logo.jpg" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     :root {
-      --bg-1: #05060a;
-      --bg-2: #0b1020;
-      --bg-3: #1a1030;
+      --bg-1: #060812;
+      --bg-2: #0a1020;
+      --bg-3: #1d1234;
       --glass: rgba(255, 255, 255, 0.08);
-      --border: rgba(255, 255, 255, 0.14);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --border: rgba(255, 255, 255, 0.12);
       --text: #ffffff;
       --muted: rgba(255, 255, 255, 0.78);
-      --accent-1: #7a3cff;
-      --accent-2: #9f73ff;
-      --accent-3: #5b21b6;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      --muted-soft: rgba(255, 255, 255, 0.60);
+      --accent-1: #7b3dff;
+      --accent-2: #a67dff;
+      --accent-3: #5f25d9;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       min-height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+      font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 15% 20%, rgba(122, 60, 255, 0.20), transparent 30%),
-        radial-gradient(circle at 85% 25%, rgba(91, 33, 182, 0.24), transparent 28%),
-        radial-gradient(circle at 50% 80%, rgba(159, 115, 255, 0.18), transparent 32%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
-      overflow: hidden;
+        radial-gradient(circle at 14% 16%, rgba(123, 61, 255, 0.24), transparent 30%),
+        radial-gradient(circle at 84% 22%, rgba(95, 37, 217, 0.25), transparent 28%),
+        radial-gradient(circle at 50% 84%, rgba(166, 125, 255, 0.16), transparent 34%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 44%, var(--bg-3));
+      overflow-x: hidden;
     }
 
     body {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      padding: 18px;
     }
 
     .bg-orb,
     .bg-orb-2,
     .bg-orb-3 {
-      position: absolute;
+      position: fixed;
       border-radius: 999px;
-      filter: blur(70px);
+      filter: blur(75px);
       opacity: 0.55;
       pointer-events: none;
+      z-index: 0;
     }
 
     .bg-orb {
-      width: 340px;
-      height: 340px;
-      background: rgba(122, 60, 255, 0.30);
-      top: -80px;
-      left: -60px;
-      animation: floatOne 10s ease-in-out infinite;
+      width: 320px;
+      height: 320px;
+      background: rgba(123, 61, 255, 0.28);
+      top: -90px;
+      left: -70px;
+      animation: floatOne 11s ease-in-out infinite;
     }
 
     .bg-orb-2 {
-      width: 300px;
-      height: 300px;
-      background: rgba(111, 52, 255, 0.22);
+      width: 280px;
+      height: 280px;
+      background: rgba(95, 37, 217, 0.25);
       right: -60px;
       bottom: -50px;
-      animation: floatTwo 12s ease-in-out infinite;
+      animation: floatTwo 13s ease-in-out infinite;
     }
 
     .bg-orb-3 {
       width: 220px;
       height: 220px;
-      background: rgba(170, 130, 255, 0.16);
-      top: 18%;
-      right: 16%;
-      animation: floatThree 11s ease-in-out infinite;
+      background: rgba(166, 125, 255, 0.16);
+      top: 20%;
+      right: 12%;
+      animation: floatThree 10s ease-in-out infinite;
     }
 
     .shell {
-      width: min(92vw, 980px);
-      padding: 22px;
+      width: min(100%, 1120px);
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     .card {
@@ -117,14 +131,14 @@
       border-radius: 34px;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.12),
-        rgba(255, 255, 255, 0.06)
+        rgba(255, 255, 255, 0.11),
+        rgba(255, 255, 255, 0.05)
       );
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
-      padding: 42px 34px;
+      padding: 34px;
     }
 
     .card::before {
@@ -132,17 +146,84 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(122,60,255,0.20), transparent 32%);
+        linear-gradient(125deg, rgba(255,255,255,0.06), transparent 28%),
+        radial-gradient(circle at top right, rgba(123,61,255,0.18), transparent 34%);
       pointer-events: none;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.92);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+      box-shadow: 0 0 16px rgba(123, 61, 255, 0.72);
+    }
+
+    .izmy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 520px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.92);
+      line-height: 1.35;
+    }
+
+    .izmy-badge img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .izmy-badge strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .izmy-badge span {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+      font-weight: 600;
     }
 
     .inner {
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 1fr 1.05fr;
-      gap: 34px;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 30px;
       align-items: center;
     }
 
@@ -160,114 +241,101 @@
       height: 360px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(122, 60, 255, 0.22), rgba(122, 60, 255, 0.02) 62%, transparent 72%);
-      animation: pulseRing 4.6s ease-in-out infinite;
+        radial-gradient(circle, rgba(123, 61, 255, 0.20), rgba(123, 61, 255, 0.02) 62%, transparent 72%);
+      animation: pulseRing 4.8s ease-in-out infinite;
     }
 
     .logo-wrap {
       position: relative;
-      width: 260px;
-      height: 260px;
+      width: 270px;
+      height: 270px;
       border-radius: 34px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
       border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow:
-        0 22px 60px rgba(0, 0, 0, 0.35),
+        0 24px 60px rgba(0, 0, 0, 0.34),
         inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      animation: floatLogo 5.2s ease-in-out infinite;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: floatLogo 5.4s ease-in-out infinite;
+      padding: 28px;
     }
 
     .logo-wrap img {
-      width: 82%;
+      width: 100%;
+      max-width: 190px;
       height: auto;
       display: block;
-      border-radius: 24px;
-    }
-
-    .brand-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.88);
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
-      box-shadow: 0 0 16px rgba(122, 60, 255, 0.65);
+      border-radius: 22px;
+      object-fit: contain;
     }
 
     .title {
       margin: 0;
-      font-size: clamp(36px, 5vw, 62px);
-      line-height: 1.02;
+      font-size: clamp(38px, 5.4vw, 68px);
+      line-height: 0.98;
       font-weight: 800;
-      letter-spacing: -1.4px;
+      letter-spacing: -2px;
+      max-width: 640px;
     }
 
     .title-gradient {
-      display: block;
-      background: linear-gradient(90deg, #ffffff, #cfbcff 45%, #9f73ff 100%);
+      display: inline;
+      background: linear-gradient(90deg, #ffffff, #d3c0ff 45%, #aa86ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .subtitle {
-      margin: 18px 0 0;
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.7;
+      margin: 20px 0 0;
+      font-size: clamp(16px, 1.9vw, 20px);
+      line-height: 1.75;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 560px;
+      font-weight: 600;
     }
 
     .highlight {
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .countdown-box {
-      margin-top: 26px;
+      margin-top: 28px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     .countdown {
-      min-width: 64px;
-      height: 64px;
-      border-radius: 18px;
+      min-width: 68px;
+      height: 68px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(180deg, rgba(122,60,255,0.28), rgba(122,60,255,0.16));
+      background: linear-gradient(180deg, rgba(123,61,255,0.28), rgba(123,61,255,0.16));
       border: 1px solid rgba(255,255,255,0.12);
-      font-size: 26px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      font-size: 28px;
       font-weight: 800;
     }
 
     .countdown-text {
-      color: rgba(255,255,255,0.88);
+      color: rgba(255,255,255,0.90);
       font-size: 15px;
       line-height: 1.6;
+      font-weight: 700;
+      max-width: 320px;
     }
 
     .actions {
-      margin-top: 28px;
+      margin-top: 30px;
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
@@ -281,26 +349,35 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 56px;
+      gap: 10px;
+      min-height: 58px;
       padding: 0 22px;
       border-radius: 18px;
       font-size: 15px;
-      font-weight: 700;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      font-weight: 800;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      white-space: nowrap;
     }
 
     .btn:hover {
       transform: translateY(-2px);
     }
 
+    .btn-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
     .btn-primary {
-      color: white;
+      color: #ffffff;
       background: linear-gradient(135deg, var(--accent-2), var(--accent-1), var(--accent-3));
-      box-shadow: 0 16px 40px rgba(122, 60, 255, 0.32);
+      box-shadow: 0 16px 40px rgba(123, 61, 255, 0.30);
     }
 
     .btn-secondary {
-      color: white;
+      color: #ffffff;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
     }
@@ -308,17 +385,19 @@
     .footer-note {
       margin-top: 18px;
       font-size: 13px;
-      color: rgba(255,255,255,0.60);
-      line-height: 1.6;
+      color: var(--muted-soft);
+      line-height: 1.7;
+      max-width: 520px;
+      font-weight: 600;
     }
 
     .shine {
       position: absolute;
-      inset: auto -20% -65% auto;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%);
-      transform: rotate(20deg);
+      inset: auto -18% -65% auto;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 65%);
+      transform: rotate(18deg);
       pointer-events: none;
     }
 
@@ -328,7 +407,7 @@
     }
 
     @keyframes pulseRing {
-      0%, 100% { transform: scale(0.97); opacity: 0.75; }
+      0%, 100% { transform: scale(0.97); opacity: 0.76; }
       50% { transform: scale(1.04); opacity: 1; }
     }
 
@@ -339,7 +418,7 @@
 
     @keyframes floatTwo {
       0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-16px) translateX(-10px); }
+      50% { transform: translateY(-14px) translateX(-10px); }
     }
 
     @keyframes floatThree {
@@ -347,58 +426,122 @@
       50% { transform: translateY(10px); }
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 980px) {
       .inner {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 20px;
       }
 
       .visual {
-        min-height: 280px;
-      }
-
-      .logo-wrap {
-        width: 210px;
-        height: 210px;
+        min-height: 250px;
       }
 
       .visual-ring {
-        width: 280px;
-        height: 280px;
+        width: 260px;
+        height: 260px;
       }
 
-      .card {
-        padding: 28px 22px;
+      .logo-wrap {
+        width: 220px;
+        height: 220px;
+        padding: 22px;
+      }
+
+      .logo-wrap img {
+        max-width: 150px;
+      }
+
+      .title {
+        max-width: 100%;
       }
     }
 
-    @media (max-width: 580px) {
-      .shell {
-        width: 94vw;
-        padding: 14px;
+    @media (max-width: 680px) {
+      body {
+        padding: 12px;
+        align-items: stretch;
       }
 
       .card {
         border-radius: 28px;
-        padding: 22px 18px;
+        padding: 18px 16px 20px;
+      }
+
+      .topbar {
+        align-items: stretch;
+        margin-bottom: 14px;
+      }
+
+      .brand-badge {
+        width: fit-content;
+      }
+
+      .izmy-badge {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .visual {
+        min-height: 190px;
+      }
+
+      .visual-ring {
+        width: 200px;
+        height: 200px;
+      }
+
+      .logo-wrap {
+        width: 170px;
+        height: 170px;
+        border-radius: 26px;
+        padding: 18px;
+      }
+
+      .logo-wrap img {
+        max-width: 120px;
+        border-radius: 16px;
+      }
+
+      .title {
+        font-size: clamp(32px, 11vw, 48px);
+        line-height: 1.02;
+        letter-spacing: -1.4px;
       }
 
       .subtitle {
+        margin-top: 14px;
         font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .countdown-box {
+        margin-top: 22px;
+        align-items: center;
       }
 
       .countdown {
-        min-width: 56px;
-        height: 56px;
+        min-width: 58px;
+        height: 58px;
         font-size: 24px;
+      }
+
+      .countdown-text {
+        font-size: 14px;
+        max-width: 100%;
+      }
+
+      .actions {
+        margin-top: 22px;
+        flex-direction: column;
       }
 
       .btn {
         width: 100%;
+        justify-content: center;
       }
 
-      .actions {
-        flex-direction: column;
+      .footer-note {
+        font-size: 12px;
       }
     }
   </style>
@@ -412,20 +555,30 @@
     <section class="card">
       <div class="shine"></div>
 
+      <div class="topbar">
+        <div class="brand-badge">
+          <span class="brand-dot"></span>
+          <span>Leylix</span>
+        </div>
+
+        <div class="izmy-badge">
+          <img src="assets/izmy-logo.png" alt="IZMY Entertainment GmbH" />
+          <div>
+            <strong>Empfohlen durch IZMY Entertainment GmbH</strong>
+            <span>Exclusive Adresse der Prominenten von heute und morgen.</span>
+          </div>
+        </div>
+      </div>
+
       <div class="inner">
         <div class="visual">
           <div class="visual-ring"></div>
           <div class="logo-wrap">
-            <img src="assets/logo.png" alt="Leylix Logo" />
+            <img src="assets/logo.jpg" alt="Leylix Logo" />
           </div>
         </div>
 
         <div class="content">
-          <div class="brand-badge">
-            <span class="brand-dot"></span>
-            <span>Leylix</span>
-          </div>
-
           <h1 class="title">
             Mach deine
             <span class="title-gradient">Events noch besser.</span>
@@ -450,7 +603,12 @@
               class="btn btn-primary"
               href="https://play.google.com/store/apps/details?id=com.leylix"
             >
-              Zum Play Store
+              <img
+                class="btn-icon"
+                src="assets/google-play.svg"
+                alt="Google Play"
+              />
+              <span>Zum Play Store</span>
             </a>
 
             <a
@@ -458,7 +616,12 @@
               class="btn btn-secondary"
               href="https://apps.apple.com/de/app/leylix/id6657989905"
             >
-              Zum App Store
+              <img
+                class="btn-icon"
+                src="assets/app-store.svg"
+                alt="App Store"
+              />
+              <span>Zum App Store</span>
             </a>
           </div>
 
@@ -476,17 +639,10 @@
     const IOS_URL = "https://apps.apple.com/de/app/leylix/id6657989905";
     const DESKTOP_URL = "https://leylix.com";
     const REDIRECT_DELAY_SECONDS = 5;
-
-    /*
-      HIER SPÄTER DEINE ECHTE API EINTRAGEN
-      Beispiel:
-      const TRACK_URL = "https://abc123.execute-api.eu-central-1.amazonaws.com/prod/store-track";
-    */
     const TRACK_URL = "";
 
     function getDeviceType() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-
       if (/android/i.test(ua)) return "android";
       if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "ios";
       return "desktop";
@@ -501,6 +657,13 @@
     function getSource() {
       const params = new URLSearchParams(window.location.search);
       return params.get("src") || params.get("utm_source") || document.referrer || "direct";
+    }
+
+    function cryptoRandomId() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+      return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
     }
 
     function trackEvent(eventName, extra = {}) {
@@ -521,7 +684,9 @@
       };
 
       try {
-        const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+        const blob = new Blob([JSON.stringify(payload)], {
+          type: "application/json"
+        });
         navigator.sendBeacon(TRACK_URL, blob);
       } catch (error) {
         fetch(TRACK_URL, {
@@ -531,14 +696,6 @@
           keepalive: true
         }).catch(() => {});
       }
-    }
-
-    function cryptoRandomId() {
-      if (window.crypto && crypto.randomUUID) {
-        return crypto.randomUUID();
-      }
-
-      return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
     }
 
     function redirectToStore(reason = "auto_redirect") {
