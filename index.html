@@ -738,27 +738,34 @@
       });
     }
 
-    function startCountdown() {
-      const countdownEl = document.getElementById("countdown");
-      let secondsLeft = REDIRECT_DELAY_SECONDS;
+function startCountdown() {
+  const countdownEl = document.getElementById("countdown");
+  let secondsLeft = 5;
 
-      countdownEl.textContent = String(secondsLeft);
+  countdownEl.textContent = secondsLeft;
 
-      const interval = setInterval(() => {
-        secondsLeft -= 1;
-        countdownEl.textContent = String(secondsLeft);
+  const interval = setInterval(() => {
+    secondsLeft--;
+    countdownEl.textContent = secondsLeft;
 
-        if (secondsLeft <= 0) {
-          clearInterval(interval);
-          redirectToStore("countdown_finished_redirect");
-        }
-      }, 1000);
+    if (secondsLeft <= 0) {
+      clearInterval(interval);
 
-      // Fallback, falls setInterval auf irgendeinem Gerät spinnt
-      setTimeout(() => {
-        redirectToStore("fallback_timeout_redirect");
-      }, REDIRECT_DELAY_SECONDS * 1000 + 300);
+      const ua = navigator.userAgent.toLowerCase();
+
+      if (ua.includes("android")) {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.leylix";
+      } 
+      else if (ua.includes("iphone") || ua.includes("ipad")) {
+        window.location.href = "https://apps.apple.com/de/app/leylix/id6657989905";
+      } 
+      else {
+        window.location.href = "https://leylix.com";
+      }
+
     }
+  }, 1000);
+}
 
     function init() {
       const device = getDeviceType();
