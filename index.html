@@ -6,13 +6,13 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
-  <title>Leylix – Die neue Art, Events zu entdecken, zu planen und zu erleben.</title>
+  <title>Leylix – Mach deine Events noch besser</title>
   <meta
     name="description"
     content="Leylix verbindet Events, Tickets, Locations und neue Möglichkeiten auf einer modernen Plattform."
   />
 
-  <meta property="og:title" content="Leylix – Die neue Art, Events zu entdecken, zu planen und zu erleben." />
+  <meta property="og:title" content="Leylix – Mach deine Events noch besser" />
   <meta
     property="og:description"
     content="Entdecke Leylix und lade die App direkt aus dem passenden Store herunter."
@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://store.leylix.com" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Leylix – Die neue Art, Events zu entdecken, zu planen und zu erleben." />
+  <meta name="twitter:title" content="Leylix – Mach deine Events noch besser" />
   <meta
     name="twitter:description"
     content="Die moderne Plattform für Events, Tickets, Locations und neue Möglichkeiten."
@@ -38,16 +38,18 @@
 
   <style>
     :root {
-      --apricot: #ffb88c;
-      --white-soft: #fff7f2;
-      --blue: #6ea8ff;
-      --purple: #8a5cff;
-
+      --bg-1: #050816;
+      --bg-2: #0b122a;
+      --bg-3: #1d1240;
+      --bg-4: #2d1457;
+      --pink: #ff5fd2;
+      --purple: #9f73ff;
+      --violet: #6c3cff;
       --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.82);
-      --muted-soft: rgba(255, 255, 255, 0.66);
-      --border: rgba(255, 255, 255, 0.16);
-      --shadow: 0 30px 90px rgba(22, 18, 52, 0.32);
+      --muted: rgba(255, 255, 255, 0.80);
+      --muted-soft: rgba(255, 255, 255, 0.62);
+      --border: rgba(255, 255, 255, 0.13);
+      --shadow: 0 30px 90px rgba(7, 8, 20, 0.48);
     }
 
     * {
@@ -63,11 +65,10 @@
         Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(255, 184, 140, 0.42), transparent 28%),
-        radial-gradient(circle at 86% 18%, rgba(110, 168, 255, 0.34), transparent 28%),
-        radial-gradient(circle at 50% 85%, rgba(138, 92, 255, 0.28), transparent 34%),
-        radial-gradient(circle at 50% 10%, rgba(255, 247, 242, 0.14), transparent 24%),
-        linear-gradient(135deg, #120f28 0%, #1c2142 38%, #39236d 100%);
+        radial-gradient(circle at 12% 18%, rgba(108, 60, 255, 0.28), transparent 30%),
+        radial-gradient(circle at 84% 16%, rgba(255, 95, 210, 0.20), transparent 24%),
+        radial-gradient(circle at 78% 78%, rgba(159, 115, 255, 0.22), transparent 30%),
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 38%, var(--bg-3) 74%, var(--bg-4) 100%);
       overflow-x: hidden;
     }
 
@@ -81,21 +82,20 @@
 
     .bg-orb,
     .bg-orb-2,
-    .bg-orb-3,
-    .bg-orb-4 {
+    .bg-orb-3 {
       position: fixed;
       border-radius: 999px;
       filter: blur(78px);
-      opacity: 0.5;
+      opacity: 0.52;
       pointer-events: none;
       z-index: 0;
     }
 
     .bg-orb {
-      width: 320px;
-      height: 320px;
-      background: rgba(255, 184, 140, 0.28);
-      top: -80px;
+      width: 330px;
+      height: 330px;
+      background: rgba(108, 60, 255, 0.25);
+      top: -90px;
       left: -60px;
       animation: floatOne 11s ease-in-out infinite;
     }
@@ -103,28 +103,19 @@
     .bg-orb-2 {
       width: 280px;
       height: 280px;
-      background: rgba(110, 168, 255, 0.25);
-      right: -50px;
-      top: 40px;
+      background: rgba(255, 95, 210, 0.18);
+      right: -40px;
+      top: 50px;
       animation: floatTwo 13s ease-in-out infinite;
     }
 
     .bg-orb-3 {
-      width: 260px;
-      height: 260px;
-      background: rgba(138, 92, 255, 0.24);
+      width: 270px;
+      height: 270px;
+      background: rgba(159, 115, 255, 0.20);
       bottom: -60px;
       right: 10%;
       animation: floatThree 10s ease-in-out infinite;
-    }
-
-    .bg-orb-4 {
-      width: 220px;
-      height: 220px;
-      background: rgba(255, 255, 255, 0.12);
-      left: 22%;
-      bottom: 5%;
-      animation: floatFour 12s ease-in-out infinite;
     }
 
     .shell {
@@ -139,8 +130,8 @@
       border-radius: 34px;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.12),
-        rgba(255, 255, 255, 0.06)
+        rgba(255, 255, 255, 0.10),
+        rgba(255, 255, 255, 0.05)
       );
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
@@ -154,8 +145,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(125deg, rgba(255,255,255,0.06), transparent 30%),
-        radial-gradient(circle at top right, rgba(138,92,255,0.18), transparent 34%);
+        linear-gradient(125deg, rgba(255,255,255,0.05), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,95,210,0.12), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(108,60,255,0.10), transparent 30%);
       pointer-events: none;
     }
 
@@ -176,20 +168,20 @@
       gap: 10px;
       padding: 12px 18px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.96);
       font-size: 16px;
       font-weight: 700;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.14);
     }
 
     .brand-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple), #d3bbff);
-      box-shadow: 0 0 16px rgba(138, 92, 255, 0.75);
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 0 16px rgba(159, 115, 255, 0.75);
     }
 
     .izmy-wrap {
@@ -197,7 +189,7 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      max-width: 470px;
+      max-width: 500px;
       margin-left: auto;
     }
 
@@ -208,11 +200,11 @@
     }
 
     .izmy-logo-box img {
-      height: 88px;
+      height: 98px;
       width: auto;
       object-fit: contain;
       border-radius: 10px;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.18));
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.20));
     }
 
     .izmy-badge {
@@ -221,10 +213,10 @@
       border-radius: 22px;
       background: linear-gradient(
         180deg,
-        rgba(255,255,255,0.12),
-        rgba(255,255,255,0.07)
+        rgba(255,255,255,0.10),
+        rgba(255,255,255,0.06)
       );
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 12px 36px rgba(0,0,0,0.14);
       text-align: center;
     }
@@ -242,7 +234,7 @@
       display: block;
       font-size: 14px;
       line-height: 1.55;
-      color: rgba(255,255,255,0.88);
+      color: rgba(255,255,255,0.90);
       font-weight: 700;
     }
 
@@ -269,7 +261,7 @@
       height: 360px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(255, 184, 140, 0.18), rgba(138, 92, 255, 0.04) 58%, transparent 72%);
+        radial-gradient(circle, rgba(159,115,255,0.18), rgba(255,95,210,0.04) 58%, transparent 72%);
       animation: pulseRing 4.8s ease-in-out infinite;
     }
 
@@ -294,7 +286,7 @@
 
     .logo-wrap img {
       width: 100%;
-      max-width: 200px;
+      max-width: 220px;
       height: auto;
       display: block;
       object-fit: contain;
@@ -311,7 +303,7 @@
 
     .title-gradient {
       display: inline;
-      background: linear-gradient(90deg, #ffffff, #d9c8ff 45%, #b18cff 100%);
+      background: linear-gradient(90deg, #ffffff, #d8c6ff 42%, #ff98e3 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -346,7 +338,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(180deg, rgba(138,92,255,0.28), rgba(138,92,255,0.16));
+      background: linear-gradient(180deg, rgba(159,115,255,0.28), rgba(159,115,255,0.16));
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
       font-size: 30px;
@@ -362,47 +354,33 @@
     }
 
     .actions {
-      margin-top: 28px;
+      margin-top: 30px;
       display: flex;
-      gap: 18px;
+      justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
+      gap: 42px;
+      width: 100%;
     }
 
-    .store-btn {
-      width: 102px;
-      height: 102px;
+    .store-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 24px;
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.13),
-        rgba(255,255,255,0.07)
-      );
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.16),
-        inset 0 1px 0 rgba(255,255,255,0.08);
       text-decoration: none;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.18s ease, opacity 0.18s ease;
     }
 
-    .store-btn:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 24px 50px rgba(138, 92, 255, 0.18),
-        inset 0 1px 0 rgba(255,255,255,0.08);
+    .store-link:hover {
+      transform: translateY(-3px) scale(1.02);
+      opacity: 0.96;
     }
 
-    .store-btn img {
-      width: 60px;
-      height: 60px;
+    .store-link img {
+      width: 118px;
+      height: 118px;
       object-fit: contain;
       display: block;
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,0.28));
     }
 
     .footer-note {
@@ -449,11 +427,6 @@
       50% { transform: translateY(10px); }
     }
 
-    @keyframes floatFour {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-12px) translateX(8px); }
-    }
-
     @media (max-width: 1020px) {
       .inner {
         grid-template-columns: 1fr;
@@ -476,7 +449,7 @@
       }
 
       .logo-wrap img {
-        max-width: 150px;
+        max-width: 170px;
       }
     }
 
@@ -512,7 +485,7 @@
       }
 
       .izmy-logo-box img {
-        height: 64px;
+        height: 74px;
         border-radius: 8px;
       }
 
@@ -546,7 +519,7 @@
       }
 
       .logo-wrap img {
-        max-width: 112px;
+        max-width: 126px;
       }
 
       .title {
@@ -579,19 +552,13 @@
       }
 
       .actions {
-        margin-top: 22px;
-        gap: 14px;
+        margin-top: 24px;
+        gap: 34px;
       }
 
-      .store-btn {
-        width: 82px;
-        height: 82px;
-        border-radius: 20px;
-      }
-
-      .store-btn img {
-        width: 48px;
-        height: 48px;
+      .store-link img {
+        width: 88px;
+        height: 88px;
       }
 
       .footer-note {
@@ -605,7 +572,6 @@
   <div class="bg-orb"></div>
   <div class="bg-orb-2"></div>
   <div class="bg-orb-3"></div>
-  <div class="bg-orb-4"></div>
 
   <main class="shell">
     <section class="card">
@@ -623,7 +589,7 @@
           </div>
 
           <div class="izmy-badge">
-            <strong>Empfohlen von IZMY Entertainment GmbH</strong>
+            <strong>Empfohlen durch IZMY Entertainment GmbH</strong>
             <span>Die exklusive Adresse, um Stars, Prominente und Künstler von heute und morgen zu buchen.</span>
           </div>
         </div>
@@ -659,7 +625,7 @@
           <div class="actions">
             <a
               id="playStoreBtn"
-              class="store-btn"
+              class="store-link"
               href="https://play.google.com/store/apps/details?id=com.leylix"
               aria-label="Zum Play Store"
               title="Zum Play Store"
@@ -669,7 +635,7 @@
 
             <a
               id="appStoreBtn"
-              class="store-btn"
+              class="store-link"
               href="https://apps.apple.com/de/app/leylix/id6657989905"
               aria-label="Zum App Store"
               title="Zum App Store"
