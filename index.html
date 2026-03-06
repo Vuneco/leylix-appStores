@@ -9,7 +9,6 @@
     content="Leylix verbindet Events, Tickets, Locations und neue Möglichkeiten auf einer modernen Plattform."
   />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Leylix – Mach deine Events noch besser" />
   <meta
     property="og:description"
@@ -19,8 +18,6 @@
   <meta property="og:image" content="https://store.leylix.com/assets/logo.jpg" />
   <meta property="og:url" content="https://store.leylix.com" />
 
-  <!-- Apple / Twitter -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Leylix – Mach deine Events noch besser" />
   <meta
@@ -35,7 +32,6 @@
       --bg-2: #0b1020;
       --bg-3: #1a1030;
       --glass: rgba(255, 255, 255, 0.08);
-      --glass-strong: rgba(255, 255, 255, 0.12);
       --border: rgba(255, 255, 255, 0.14);
       --text: #ffffff;
       --muted: rgba(255, 255, 255, 0.78);
@@ -49,8 +45,7 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       min-height: 100%;
@@ -166,7 +161,6 @@
       border-radius: 50%;
       background:
         radial-gradient(circle, rgba(122, 60, 255, 0.22), rgba(122, 60, 255, 0.02) 62%, transparent 72%);
-      filter: blur(2px);
       animation: pulseRing 4.6s ease-in-out infinite;
     }
 
@@ -205,7 +199,6 @@
       border: 1px solid rgba(255,255,255,0.10);
       color: rgba(255,255,255,0.88);
       font-size: 14px;
-      letter-spacing: 0.2px;
       margin-bottom: 18px;
     }
 
@@ -263,7 +256,6 @@
       justify-content: center;
       background: linear-gradient(180deg, rgba(122,60,255,0.28), rgba(122,60,255,0.16));
       border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
       font-size: 26px;
       font-weight: 800;
     }
@@ -294,7 +286,7 @@
       border-radius: 18px;
       font-size: 15px;
       font-weight: 700;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     .btn:hover {
@@ -391,15 +383,6 @@
         padding: 22px 18px;
       }
 
-      .brand-badge {
-        font-size: 13px;
-        padding: 9px 14px;
-      }
-
-      .title {
-        letter-spacing: -1px;
-      }
-
       .subtitle {
         font-size: 15px;
       }
@@ -494,20 +477,18 @@
     const DESKTOP_URL = "https://leylix.com";
     const REDIRECT_DELAY_SECONDS = 5;
 
-    // Später hier deine API eintragen, z. B. API Gateway / Lambda
+    /*
+      HIER SPÄTER DEINE ECHTE API EINTRAGEN
+      Beispiel:
+      const TRACK_URL = "https://abc123.execute-api.eu-central-1.amazonaws.com/prod/store-track";
+    */
     const TRACK_URL = "";
 
     function getDeviceType() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-      if (/android/i.test(ua)) {
-        return "android";
-      }
-
-      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        return "ios";
-      }
-
+      if (/android/i.test(ua)) return "android";
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "ios";
       return "desktop";
     }
 
@@ -519,20 +500,16 @@
 
     function getSource() {
       const params = new URLSearchParams(window.location.search);
-      return (
-        params.get("src") ||
-        params.get("utm_source") ||
-        document.referrer ||
-        "direct"
-      );
+      return params.get("src") || params.get("utm_source") || document.referrer || "direct";
     }
 
     function trackEvent(eventName, extra = {}) {
       if (!TRACK_URL) return;
 
       const payload = {
+        eventId: cryptoRandomId(),
         event: eventName,
-        timestamp: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
         href: window.location.href,
         path: window.location.pathname,
         referrer: document.referrer || "",
@@ -540,24 +517,28 @@
         language: navigator.language || "",
         platform: navigator.platform || "",
         source: getSource(),
-        ...extra,
+        ...extra
       };
 
       try {
-        const blob = new Blob([JSON.stringify(payload)], {
-          type: "application/json",
-        });
+        const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
         navigator.sendBeacon(TRACK_URL, blob);
       } catch (error) {
-        try {
-          fetch(TRACK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-            keepalive: true,
-          });
-        } catch (e) {}
+        fetch(TRACK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(() => {});
       }
+    }
+
+    function cryptoRandomId() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+
+      return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
     }
 
     function redirectToStore(reason = "auto_redirect") {
@@ -566,7 +547,7 @@
 
       trackEvent(reason, {
         device,
-        targetUrl,
+        targetUrl
       });
 
       setTimeout(() => {
@@ -581,12 +562,16 @@
       playStoreBtn.addEventListener("click", function () {
         trackEvent("manual_play_store_click", {
           button: "play_store",
+          device: getDeviceType(),
+          targetUrl: ANDROID_URL
         });
       });
 
       appStoreBtn.addEventListener("click", function () {
         trackEvent("manual_app_store_click", {
           button: "app_store",
+          device: getDeviceType(),
+          targetUrl: IOS_URL
         });
       });
     }
@@ -614,7 +599,7 @@
 
       trackEvent("page_view", {
         device,
-        targetUrl,
+        targetUrl
       });
 
       setupManualButtons();
