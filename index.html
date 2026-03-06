@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leylix App Download</title>
+
+<script>
+function redirect() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+  const android = "https://play.google.com/store/apps/details?id=com.leylix";
+  const ios = "https://apps.apple.com/de/app/leylix/id6657989905";
+
+  if (/android/i.test(ua)) {
+    window.location.href = android;
+  } 
+  else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+    window.location.href = ios;
+  }
+}
+</script>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial;
+background:#0b1220;
+color:white;
+text-align:center;
+}
+.box{
+padding:40px;
+border-radius:18px;
+background:rgba(255,255,255,0.06);
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+</style>
+
+</head>
+
+<body onload="redirect()">
+
+<div class="box">
+<h1>Leylix</h1>
+<p>Du wirst automatisch zum passenden App Store weitergeleitet.</p>
+</div>
+
+</body>
+</html>
