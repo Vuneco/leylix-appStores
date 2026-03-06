@@ -1,54 +1,627 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leylix App Download</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leylix – Mach deine Events noch besser</title>
+  <meta
+    name="description"
+    content="Leylix verbindet Events, Tickets, Locations und neue Möglichkeiten auf einer modernen Plattform."
+  />
 
-<script>
-function redirect() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  <!-- Open Graph -->
+  <meta property="og:title" content="Leylix – Mach deine Events noch besser" />
+  <meta
+    property="og:description"
+    content="Entdecke Leylix und lade die App direkt aus dem passenden Store herunter."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://store.leylix.com/assets/logo.jpg" />
+  <meta property="og:url" content="https://store.leylix.com" />
 
-  const android = "https://play.google.com/store/apps/details?id=com.leylix";
-  const ios = "https://apps.apple.com/de/app/leylix/id6657989905";
+  <!-- Apple / Twitter -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Leylix – Mach deine Events noch besser" />
+  <meta
+    name="twitter:description"
+    content="Die moderne Plattform für Events, Tickets, Locations und neue Möglichkeiten."
+  />
+  <meta name="twitter:image" content="https://store.leylix.com/assets/logo.jpg" />
 
-  if (/android/i.test(ua)) {
-    window.location.href = android;
-  } 
-  else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-    window.location.href = ios;
-  }
-}
-</script>
+  <style>
+    :root {
+      --bg-1: #05060a;
+      --bg-2: #0b1020;
+      --bg-3: #1a1030;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --border: rgba(255, 255, 255, 0.14);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.78);
+      --accent-1: #7a3cff;
+      --accent-2: #9f73ff;
+      --accent-3: #5b21b6;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+    }
 
-<style>
-body{
-margin:0;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Arial;
-background:#0b1220;
-color:white;
-text-align:center;
-}
-.box{
-padding:40px;
-border-radius:18px;
-background:rgba(255,255,255,0.06);
-box-shadow:0 10px 30px rgba(0,0,0,0.25);
-}
-</style>
+    * {
+      box-sizing: border-box;
+    }
 
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(122, 60, 255, 0.20), transparent 30%),
+        radial-gradient(circle at 85% 25%, rgba(91, 33, 182, 0.24), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(159, 115, 255, 0.18), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .bg-orb,
+    .bg-orb-2,
+    .bg-orb-3 {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(70px);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .bg-orb {
+      width: 340px;
+      height: 340px;
+      background: rgba(122, 60, 255, 0.30);
+      top: -80px;
+      left: -60px;
+      animation: floatOne 10s ease-in-out infinite;
+    }
+
+    .bg-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(111, 52, 255, 0.22);
+      right: -60px;
+      bottom: -50px;
+      animation: floatTwo 12s ease-in-out infinite;
+    }
+
+    .bg-orb-3 {
+      width: 220px;
+      height: 220px;
+      background: rgba(170, 130, 255, 0.16);
+      top: 18%;
+      right: 16%;
+      animation: floatThree 11s ease-in-out infinite;
+    }
+
+    .shell {
+      width: min(92vw, 980px);
+      padding: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.06)
+      );
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      padding: 42px 34px;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(122,60,255,0.20), transparent 32%);
+      pointer-events: none;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      position: relative;
+    }
+
+    .visual-ring {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(122, 60, 255, 0.22), rgba(122, 60, 255, 0.02) 62%, transparent 72%);
+      filter: blur(2px);
+      animation: pulseRing 4.6s ease-in-out infinite;
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      animation: floatLogo 5.2s ease-in-out infinite;
+    }
+
+    .logo-wrap img {
+      width: 82%;
+      height: auto;
+      display: block;
+      border-radius: 24px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      margin-bottom: 18px;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+      box-shadow: 0 0 16px rgba(122, 60, 255, 0.65);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -1.4px;
+    }
+
+    .title-gradient {
+      display: block;
+      background: linear-gradient(90deg, #ffffff, #cfbcff 45%, #9f73ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .highlight {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .countdown-box {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .countdown {
+      min-width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(122,60,255,0.28), rgba(122,60,255,0.16));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .countdown-text {
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 18px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1), var(--accent-3));
+      box-shadow: 0 16px 40px rgba(122, 60, 255, 0.32);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.60);
+      line-height: 1.6;
+    }
+
+    .shine {
+      position: absolute;
+      inset: auto -20% -65% auto;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%);
+      transform: rotate(20deg);
+      pointer-events: none;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { transform: scale(0.97); opacity: 0.75; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    @keyframes floatOne {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(16px) translateX(12px); }
+    }
+
+    @keyframes floatTwo {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-16px) translateX(-10px); }
+    }
+
+    @keyframes floatThree {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(10px); }
+    }
+
+    @media (max-width: 920px) {
+      .inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .visual {
+        min-height: 280px;
+      }
+
+      .logo-wrap {
+        width: 210px;
+        height: 210px;
+      }
+
+      .visual-ring {
+        width: 280px;
+        height: 280px;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .shell {
+        width: 94vw;
+        padding: 14px;
+      }
+
+      .card {
+        border-radius: 28px;
+        padding: 22px 18px;
+      }
+
+      .brand-badge {
+        font-size: 13px;
+        padding: 9px 14px;
+      }
+
+      .title {
+        letter-spacing: -1px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .countdown {
+        min-width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
+<body>
+  <div class="bg-orb"></div>
+  <div class="bg-orb-2"></div>
+  <div class="bg-orb-3"></div>
 
-<body onload="redirect()">
+  <main class="shell">
+    <section class="card">
+      <div class="shine"></div>
 
-<div class="box">
-<h1>Leylix</h1>
-<p>Du wirst automatisch zum passenden App Store weitergeleitet.</p>
-</div>
+      <div class="inner">
+        <div class="visual">
+          <div class="visual-ring"></div>
+          <div class="logo-wrap">
+            <img src="assets/logo.jpg" alt="Leylix Logo" />
+          </div>
+        </div>
 
+        <div class="content">
+          <div class="brand-badge">
+            <span class="brand-dot"></span>
+            <span>Leylix</span>
+          </div>
+
+          <h1 class="title">
+            Mach deine
+            <span class="title-gradient">Events noch besser.</span>
+          </h1>
+
+          <p class="subtitle">
+            Entdecke mit <span class="highlight">Leylix</span> eine neue Art,
+            Events, Tickets, Locations und besondere Möglichkeiten auf einer
+            starken Plattform zu verbinden.
+          </p>
+
+          <div class="countdown-box">
+            <div class="countdown" id="countdown">5</div>
+            <div class="countdown-text">
+              Du wirst automatisch zum passenden Store weitergeleitet.
+            </div>
+          </div>
+
+          <div class="actions">
+            <a
+              id="playStoreBtn"
+              class="btn btn-primary"
+              href="https://play.google.com/store/apps/details?id=com.leylix"
+            >
+              Zum Play Store
+            </a>
+
+            <a
+              id="appStoreBtn"
+              class="btn btn-secondary"
+              href="https://apps.apple.com/de/app/leylix/id6657989905"
+            >
+              Zum App Store
+            </a>
+          </div>
+
+          <div class="footer-note">
+            Falls die automatische Weiterleitung nicht startet, kannst du den
+            passenden Store auch manuell öffnen.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.leylix";
+    const IOS_URL = "https://apps.apple.com/de/app/leylix/id6657989905";
+    const DESKTOP_URL = "https://leylix.com";
+    const REDIRECT_DELAY_SECONDS = 5;
+
+    // Später hier deine API eintragen, z. B. API Gateway / Lambda
+    const TRACK_URL = "";
+
+    function getDeviceType() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/android/i.test(ua)) {
+        return "android";
+      }
+
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        return "ios";
+      }
+
+      return "desktop";
+    }
+
+    function getTargetUrl(device) {
+      if (device === "android") return ANDROID_URL;
+      if (device === "ios") return IOS_URL;
+      return DESKTOP_URL;
+    }
+
+    function getSource() {
+      const params = new URLSearchParams(window.location.search);
+      return (
+        params.get("src") ||
+        params.get("utm_source") ||
+        document.referrer ||
+        "direct"
+      );
+    }
+
+    function trackEvent(eventName, extra = {}) {
+      if (!TRACK_URL) return;
+
+      const payload = {
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        href: window.location.href,
+        path: window.location.pathname,
+        referrer: document.referrer || "",
+        userAgent: navigator.userAgent || "",
+        language: navigator.language || "",
+        platform: navigator.platform || "",
+        source: getSource(),
+        ...extra,
+      };
+
+      try {
+        const blob = new Blob([JSON.stringify(payload)], {
+          type: "application/json",
+        });
+        navigator.sendBeacon(TRACK_URL, blob);
+      } catch (error) {
+        try {
+          fetch(TRACK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            keepalive: true,
+          });
+        } catch (e) {}
+      }
+    }
+
+    function redirectToStore(reason = "auto_redirect") {
+      const device = getDeviceType();
+      const targetUrl = getTargetUrl(device);
+
+      trackEvent(reason, {
+        device,
+        targetUrl,
+      });
+
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 120);
+    }
+
+    function setupManualButtons() {
+      const playStoreBtn = document.getElementById("playStoreBtn");
+      const appStoreBtn = document.getElementById("appStoreBtn");
+
+      playStoreBtn.addEventListener("click", function () {
+        trackEvent("manual_play_store_click", {
+          button: "play_store",
+        });
+      });
+
+      appStoreBtn.addEventListener("click", function () {
+        trackEvent("manual_app_store_click", {
+          button: "app_store",
+        });
+      });
+    }
+
+    function startCountdown() {
+      const countdownEl = document.getElementById("countdown");
+      let secondsLeft = REDIRECT_DELAY_SECONDS;
+
+      countdownEl.textContent = secondsLeft;
+
+      const interval = setInterval(() => {
+        secondsLeft -= 1;
+        countdownEl.textContent = secondsLeft;
+
+        if (secondsLeft <= 0) {
+          clearInterval(interval);
+          redirectToStore("countdown_finished_redirect");
+        }
+      }, 1000);
+    }
+
+    function init() {
+      const device = getDeviceType();
+      const targetUrl = getTargetUrl(device);
+
+      trackEvent("page_view", {
+        device,
+        targetUrl,
+      });
+
+      setupManualButtons();
+      startCountdown();
+    }
+
+    init();
+  </script>
 </body>
 </html>
