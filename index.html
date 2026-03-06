@@ -6,19 +6,19 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
-  <title>Leylix – Die neue Art, Events zu entdecken, zu planen und zu erleben.</title>
+  <title>Leylix – Mach deine Events noch besser</title>
   <meta
     name="description"
     content="Leylix verbindet Events, Tickets, Locations und neue Möglichkeiten auf einer modernen Plattform."
   />
 
-  <meta property="og:title" content="Leylix – Die neue Art, Events zu entdecken, zu planen und zu erleben." />
+  <meta property="og:title" content="Leylix – Mach deine Events noch besser" />
   <meta
     property="og:description"
     content="Entdecke Leylix und lade die App direkt aus dem passenden Store herunter."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://store.leylix.com/assets/logo.png" />
+  <meta property="og:image" content="https://store.leylix.com/assets/logo.jpg" />
   <meta property="og:url" content="https://store.leylix.com" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -27,12 +27,12 @@
     name="twitter:description"
     content="Die moderne Plattform für Events, Tickets, Locations und neue Möglichkeiten."
   />
-  <meta name="twitter:image" content="https://store.leylix.com/assets/logo.png" />
+  <meta name="twitter:image" content="https://store.leylix.com/assets/logo.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
     rel="stylesheet"
   />
 
@@ -46,7 +46,7 @@
       --purple: #9f73ff;
       --violet: #6c3cff;
       --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.80);
+      --muted: rgba(255, 255, 255, 0.82);
       --muted-soft: rgba(255, 255, 255, 0.62);
       --border: rgba(255, 255, 255, 0.13);
       --shadow: 0 30px 90px rgba(7, 8, 20, 0.48);
@@ -61,15 +61,6 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
-      font-family: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 12% 18%, rgba(108, 60, 255, 0.28), transparent 30%),
-        radial-gradient(circle at 84% 16%, rgba(255, 95, 210, 0.20), transparent 24%),
-        radial-gradient(circle at 78% 78%, rgba(159, 115, 255, 0.22), transparent 30%),
-        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 38%, var(--bg-3) 74%, var(--bg-4) 100%);
-      overflow-x: hidden;
     }
 
     body {
@@ -78,6 +69,15 @@
       align-items: center;
       justify-content: center;
       padding: 18px;
+      overflow-x: hidden;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(108, 60, 255, 0.28), transparent 30%),
+        radial-gradient(circle at 84% 16%, rgba(255, 95, 210, 0.20), transparent 24%),
+        radial-gradient(circle at 78% 78%, rgba(159, 115, 255, 0.22), transparent 30%),
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 38%, var(--bg-3) 74%, var(--bg-4) 100%);
     }
 
     .bg-orb,
@@ -193,14 +193,8 @@
       margin-left: auto;
     }
 
-    .izmy-logo-box {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
     .izmy-logo-box img {
-      height: 98px;
+      height: 108px;
       width: auto;
       object-fit: contain;
       border-radius: 10px;
@@ -294,11 +288,12 @@
 
     .title {
       margin: 0;
+      max-width: 660px;
+      font-family: "Playfair Display", Georgia, serif;
       font-size: clamp(44px, 5vw, 76px);
       line-height: 0.98;
-      font-weight: 800;
-      letter-spacing: -2px;
-      max-width: 660px;
+      font-weight: 700;
+      letter-spacing: -1.2px;
     }
 
     .title-gradient {
@@ -376,8 +371,8 @@
     }
 
     .store-link img {
-      width: 118px;
-      height: 118px;
+      width: 138px;
+      height: 138px;
       object-fit: contain;
       display: block;
       filter: drop-shadow(0 14px 26px rgba(0,0,0,0.28));
@@ -390,16 +385,6 @@
       line-height: 1.65;
       max-width: 560px;
       font-weight: 500;
-    }
-
-    .shine {
-      position: absolute;
-      inset: auto -18% -65% auto;
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 65%);
-      transform: rotate(18deg);
-      pointer-events: none;
     }
 
     @keyframes floatLogo {
@@ -485,8 +470,7 @@
       }
 
       .izmy-logo-box img {
-        height: 74px;
-        border-radius: 8px;
+        height: 82px;
       }
 
       .izmy-badge {
@@ -525,7 +509,7 @@
       .title {
         font-size: clamp(34px, 10.5vw, 52px);
         line-height: 1.02;
-        letter-spacing: -1.4px;
+        letter-spacing: -0.6px;
       }
 
       .subtitle {
@@ -557,8 +541,8 @@
       }
 
       .store-link img {
-        width: 88px;
-        height: 88px;
+        width: 96px;
+        height: 96px;
       }
 
       .footer-note {
@@ -575,8 +559,6 @@
 
   <main class="shell">
     <section class="card">
-      <div class="shine"></div>
-
       <div class="topbar">
         <div class="brand-badge">
           <span class="brand-dot"></span>
@@ -589,7 +571,7 @@
           </div>
 
           <div class="izmy-badge">
-            <strong>Empfohlen von IZMY Entertainment GmbH</strong>
+            <strong>Empfohlen durch IZMY Entertainment GmbH</strong>
             <span>Die exklusive Adresse, um Stars, Prominente und Künstler von heute und morgen zu buchen.</span>
           </div>
         </div>
@@ -599,14 +581,14 @@
         <div class="visual">
           <div class="visual-ring"></div>
           <div class="logo-wrap">
-            <img src="assets/logo.png" alt="Leylix Logo" />
+            <img src="assets/logo.jpg" alt="Leylix Logo" />
           </div>
         </div>
 
         <div class="content">
           <h1 class="title">
-            Die neue Art, Events zu entdecken, 
-            <span class="title-gradient">zu planen und zu erleben.</span>
+            Mach deine
+            <span class="title-gradient">Events noch besser.</span>
           </h1>
 
           <p class="subtitle">
@@ -624,13 +606,13 @@
 
           <div class="actions">
             <a
-              id="playstoreBtn"
+              id="playStoreBtn"
               class="store-link"
               href="https://play.google.com/store/apps/details?id=com.leylix"
               aria-label="Zum Play Store"
               title="Zum Play Store"
             >
-              <img src="assets/playstore.png" alt="Play Store" />
+              <img src="assets/playStore.png" alt="Play Store" />
             </a>
 
             <a
@@ -660,6 +642,8 @@
     const REDIRECT_DELAY_SECONDS = 5;
     const TRACK_URL = "";
 
+    let hasRedirected = false;
+
     function getDeviceType() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
       if (/android/i.test(ua)) return "android";
@@ -679,8 +663,8 @@
     }
 
     function cryptoRandomId() {
-      if (window.crypto && crypto.randomUUID) {
-        return crypto.randomUUID();
+      if (window.crypto && window.crypto.randomUUID) {
+        return window.crypto.randomUUID();
       }
       return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
     }
@@ -718,6 +702,9 @@
     }
 
     function redirectToStore(reason = "auto_redirect") {
+      if (hasRedirected) return;
+      hasRedirected = true;
+
       const device = getDeviceType();
       const targetUrl = getTargetUrl(device);
 
@@ -726,9 +713,7 @@
         targetUrl
       });
 
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 120);
+      window.location.replace(targetUrl);
     }
 
     function setupManualButtons() {
@@ -756,17 +741,22 @@
       const countdownEl = document.getElementById("countdown");
       let secondsLeft = REDIRECT_DELAY_SECONDS;
 
-      countdownEl.textContent = secondsLeft;
+      countdownEl.textContent = String(secondsLeft);
 
       const interval = setInterval(() => {
         secondsLeft -= 1;
-        countdownEl.textContent = secondsLeft;
+        countdownEl.textContent = String(secondsLeft);
 
         if (secondsLeft <= 0) {
           clearInterval(interval);
           redirectToStore("countdown_finished_redirect");
         }
       }, 1000);
+
+      // Fallback, falls setInterval auf irgendeinem Gerät spinnt
+      setTimeout(() => {
+        redirectToStore("fallback_timeout_redirect");
+      }, REDIRECT_DELAY_SECONDS * 1000 + 300);
     }
 
     function init() {
@@ -782,7 +772,7 @@
       startCountdown();
     }
 
-    init();
+    document.addEventListener("DOMContentLoaded", init);
   </script>
 </body>
 </html>
