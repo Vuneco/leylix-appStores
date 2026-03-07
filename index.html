@@ -679,6 +679,9 @@
   }
 
   function trackEvent(eventName, extra = {}) {
+
+    alert("trackEvent läuft: " + eventName);
+    console.log("TRACK_URL:", TRACK_URL);
     if (!TRACK_URL) return;
 
     const payload = {
