@@ -678,40 +678,46 @@
     return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
   }
 
-  function trackEvent(eventName, extra = {}) {
+function trackEvent(eventName, extra = {}) {
+  alert("trackEvent läuft: " + eventName);
+  console.log("TRACK_URL:", TRACK_URL);
 
-    alert("trackEvent läuft: " + eventName);
-    console.log("TRACK_URL:", TRACK_URL);
-    if (!TRACK_URL) return;
-
-    const payload = {
-      eventId: cryptoRandomId(),
-      event: eventName,
-      createdAt: new Date().toISOString(),
-      href: window.location.href,
-      path: window.location.pathname,
-      referrer: document.referrer || "",
-      userAgent: navigator.userAgent || "",
-      language: navigator.language || "",
-      platform: navigator.platform || "",
-      source: getSource(),
-      ...extra
-    };
-
-    try {
-      const blob = new Blob([JSON.stringify(payload)], {
-        type: "application/json"
-      });
-      navigator.sendBeacon(TRACK_URL, blob);
-    } catch (error) {
-      fetch(TRACK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(() => {});
-    }
+  if (!TRACK_URL) {
+    alert("TRACK_URL ist leer");
+    return;
   }
+
+  const payload = {
+    eventId: cryptoRandomId(),
+    event: eventName,
+    createdAt: new Date().toISOString(),
+    href: window.location.href,
+    path: window.location.pathname,
+    referrer: document.referrer || "",
+    userAgent: navigator.userAgent || "",
+    language: navigator.language || "",
+    platform: navigator.platform || "",
+    source: getSource(),
+    ...extra
+  };
+
+  fetch(TRACK_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+    .then(async (res) => {
+      const text = await res.text();
+      console.log("API Response:", res.status, text);
+      alert("API Response: " + res.status);
+    })
+    .catch((err) => {
+      console.error("Fetch Fehler:", err);
+      alert("Fetch Fehler: " + err.message);
+    });
+}
 
   function redirectToStore(reason = "auto_redirect") {
     if (hasRedirected) return;
