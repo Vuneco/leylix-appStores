@@ -679,13 +679,7 @@
   }
 
 function trackEvent(eventName, extra = {}) {
-  alert("trackEvent läuft: " + eventName);
-  console.log("TRACK_URL:", TRACK_URL);
-
-  if (!TRACK_URL) {
-    alert("TRACK_URL ist leer");
-    return;
-  }
+  if (!TRACK_URL) return;
 
   const payload = {
     eventId: cryptoRandomId(),
@@ -706,18 +700,12 @@ function trackEvent(eventName, extra = {}) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(payload)
-  })
-    .then(async (res) => {
-      const text = await res.text();
-      console.log("API Response:", res.status, text);
-      alert("API Response: " + res.status);
-    })
-    .catch((err) => {
-      console.error("Fetch Fehler:", err);
-      alert("Fetch Fehler: " + err.message);
-    });
-}
+    body: JSON.stringify(payload),
+    keepalive: true
+  }).catch((err) => {
+    console.error("Tracking-Fehler:", err);
+  });
+}}
 
   function redirectToStore(reason = "auto_redirect") {
     if (hasRedirected) return;
