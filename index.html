@@ -635,153 +635,152 @@
     </section>
   </main>
 
-  <script>
-    
-    const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.leylix";
-    const IOS_URL = "https://apps.apple.com/de/app/leylix/id6657989905";
-    const DESKTOP_URL = "https://leylix.com";
-    const REDIRECT_DELAY_SECONDS = 5;
-    const TRACK_URL = "";
+<script>
+  const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.leylix";
+  const IOS_URL = "https://apps.apple.com/de/app/leylix/id6657989905";
+  const DESKTOP_URL = "https://leylix.com";
+  const REDIRECT_DELAY_SECONDS = 5;
+  const TRACK_URL = "";
 
-    let hasRedirected = false;
+  let hasRedirected = false;
 
-    function getDeviceType() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      if (/android/i.test(ua)) return "android";
-      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "ios";
-      return "desktop";
+  function getDeviceType() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(ua)) return "android";
+
+    // iPhone, iPad, iPod + iPadOS, das sich als Mac ausgibt
+    if (
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    ) {
+      return "ios";
     }
 
-    function getTargetUrl(device) {
-      if (device === "android") return ANDROID_URL;
-      if (device === "ios") return IOS_URL;
-      return DESKTOP_URL;
-    }
+    return "desktop";
+  }
 
-    function getSource() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("src") || params.get("utm_source") || document.referrer || "direct";
-    }
+  function getTargetUrl(device) {
+    if (device === "android") return ANDROID_URL;
+    if (device === "ios") return IOS_URL;
+    return DESKTOP_URL;
+  }
 
-    function cryptoRandomId() {
-      if (window.crypto && window.crypto.randomUUID) {
-        return window.crypto.randomUUID();
+  function getSource() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("src") || params.get("utm_source") || document.referrer || "direct";
+  }
+
+  function cryptoRandomId() {
+    if (window.crypto && window.crypto.randomUUID) {
+      return window.crypto.randomUUID();
+    }
+    return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+  }
+
+  function trackEvent(eventName, extra = {}) {
+    if (!TRACK_URL) return;
+
+    const payload = {
+      eventId: cryptoRandomId(),
+      event: eventName,
+      createdAt: new Date().toISOString(),
+      href: window.location.href,
+      path: window.location.pathname,
+      referrer: document.referrer || "",
+      userAgent: navigator.userAgent || "",
+      language: navigator.language || "",
+      platform: navigator.platform || "",
+      source: getSource(),
+      ...extra
+    };
+
+    try {
+      const blob = new Blob([JSON.stringify(payload)], {
+        type: "application/json"
+      });
+      navigator.sendBeacon(TRACK_URL, blob);
+    } catch (error) {
+      fetch(TRACK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(() => {});
+    }
+  }
+
+  function redirectToStore(reason = "auto_redirect") {
+    if (hasRedirected) return;
+    hasRedirected = true;
+
+    const device = getDeviceType();
+    const targetUrl = getTargetUrl(device);
+
+    trackEvent(reason, {
+      device,
+      targetUrl
+    });
+
+    window.location.replace(targetUrl);
+  }
+
+  function setupManualButtons() {
+    const playStoreBtn = document.getElementById("playStoreBtn");
+    const appStoreBtn = document.getElementById("appStoreBtn");
+
+    playStoreBtn.addEventListener("click", function () {
+      trackEvent("manual_play_store_click", {
+        button: "play_store",
+        device: getDeviceType(),
+        targetUrl: ANDROID_URL
+      });
+    });
+
+    appStoreBtn.addEventListener("click", function () {
+      trackEvent("manual_app_store_click", {
+        button: "app_store",
+        device: getDeviceType(),
+        targetUrl: IOS_URL
+      });
+    });
+  }
+
+  function startCountdown() {
+    const countdownEl = document.getElementById("countdown");
+    let secondsLeft = REDIRECT_DELAY_SECONDS;
+
+    countdownEl.textContent = String(secondsLeft);
+
+    const interval = setInterval(() => {
+      secondsLeft -= 1;
+      countdownEl.textContent = String(secondsLeft);
+
+      if (secondsLeft <= 0) {
+        clearInterval(interval);
+        redirectToStore("auto_countdown_finish");
       }
-      return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
-    }
+    }, 1000);
 
-    function trackEvent(eventName, extra = {}) {
-      if (!TRACK_URL) return;
+    setTimeout(() => {
+      redirectToStore("fallback_timeout_redirect");
+    }, REDIRECT_DELAY_SECONDS * 1000 + 400);
+  }
 
-      const payload = {
-        eventId: cryptoRandomId(),
-        event: eventName,
-        createdAt: new Date().toISOString(),
-        href: window.location.href,
-        path: window.location.pathname,
-        referrer: document.referrer || "",
-        userAgent: navigator.userAgent || "",
-        language: navigator.language || "",
-        platform: navigator.platform || "",
-        source: getSource(),
-        ...extra
-      };
+  function init() {
+    const device = getDeviceType();
+    const targetUrl = getTargetUrl(device);
 
-      try {
-        const blob = new Blob([JSON.stringify(payload)], {
-          type: "application/json"
-        });
-        navigator.sendBeacon(TRACK_URL, blob);
-      } catch (error) {
-        fetch(TRACK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          keepalive: true
-        }).catch(() => {});
-      }
-    }
+    trackEvent("page_view", {
+      device,
+      targetUrl
+    });
 
-    function redirectToStore(reason = "auto_redirect") {
-      if (hasRedirected) return;
-      hasRedirected = true;
+    setupManualButtons();
+    startCountdown();
+  }
 
-      const device = getDeviceType();
-      const targetUrl = getTargetUrl(device);
-
-      trackEvent(reason, {
-        device,
-        targetUrl
-      });
-
-      window.location.replace(targetUrl);
-    }
-
-    function setupManualButtons() {
-      const playStoreBtn = document.getElementById("playStoreBtn");
-      const appStoreBtn = document.getElementById("appStoreBtn");
-
-      playStoreBtn.addEventListener("click", function () {
-        trackEvent("manual_play_store_click", {
-          button: "play_store",
-          device: getDeviceType(),
-          targetUrl: ANDROID_URL
-        });
-      });
-
-      appStoreBtn.addEventListener("click", function () {
-        trackEvent("manual_app_store_click", {
-          button: "app_store",
-          device: getDeviceType(),
-          targetUrl: IOS_URL
-        });
-      });
-    }
-
-function startCountdown() {
-  
-  const countdownEl = document.getElementById("countdown");
-  let secondsLeft = 8;
-
-  countdownEl.textContent = secondsLeft;
-
-  const interval = setInterval(() => {
-    secondsLeft--;
-    countdownEl.textContent = secondsLeft;
-
-    if (secondsLeft <= 0) {
-      clearInterval(interval);
-
-      const ua = navigator.userAgent.toLowerCase();
-
-      if (ua.includes("android")) {
-        window.location.href = "https://play.google.com/store/apps/details?id=com.leylix";
-      } 
-      else if (ua.includes("iphone") || ua.includes("ipad")) {
-        window.location.href = "https://apps.apple.com/de/app/leylix/id6657989905";
-      } 
-      else {
-        window.location.href = "https://leylix.com";
-      }
-
-    }
-  }, 1000);
-}
-
-    function init() {
-      const device = getDeviceType();
-      const targetUrl = getTargetUrl(device);
-
-      trackEvent("page_view", {
-        device,
-        targetUrl
-      });
-
-      setupManualButtons();
-      startCountdown();
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
-  </script>
+  document.addEventListener("DOMContentLoaded", init);
+</script>
 </body>
 </html>
